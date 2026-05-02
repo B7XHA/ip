@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>Hacker Simulator</title>
+
+<style>
+body {
+    background: black;
+    color: #00ff00;
+    font-family: monospace;
+    text-align: center;
+}
+
+#terminal {
+    margin-top: 50px;
+    font-size: 18px;
+}
+
+/* input تصميم */
+input {
+    background: black;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 10px;
+    width: 250px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    background: #00ff00;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+</style>
+
+<!-- اعلان فوق -->
+<script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"></script>
+
+</head>
+
+<body>
+
+<h1>💻 Hacker Simulator</h1>
+
+<!-- input IP -->
+<input type="text" id="ipInput" placeholder="Enter IP Address">
+
+<div id="terminal"></div>
+
+<button onclick="startHack()">Start Hack</button>
+
+<!-- اعلان نص -->
+<div id="container-596225155ab3da796681d551cb4b7cf4"></div>
+<script async src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"></script>
+
+<script>
+
+let lines = [
+"Connecting to server...",
+"Scanning IP...",
+"Bypassing firewall...",
+"Cracking password...",
+"Fetching data...",
+"Access Granted ✔"
+];
+
+function startHack() {
+    let i = 0;
+    let terminal = document.getElementById("terminal");
+    let ip = document.getElementById("ipInput").value;
+
+    if (!ip) {
+        alert("Enter IP first");
+        return;
+    }
+
+    terminal.innerHTML = "";
+
+    let interval = setInterval(() => {
+        if (i < lines.length) {
+            terminal.innerHTML += lines[i] + "<br>";
+            i++;
+        } else {
+            clearInterval(interval);
+            getIPInfo(ip);
+        }
+    }, 1000);
+}
+
+// جلب معلومات IP
+function getIPInfo(ip) {
+    fetch(`http://ip-api.com/json/${ip}`)
+    .then(res => res.json())
+    .then(data => {
+
+        let terminal = document.getElementById("terminal");
+
+        terminal.innerHTML += "<br>====== RESULT ======<br>";
+
+        if (data.status === "success") {
+            terminal.innerHTML += `
+Country: ${data.country} <br>
+City: ${data.city} <br>
+ISP: ${data.isp} <br>
+Org: ${data.org} <br>
+ZIP: ${data.zip} <br>
+Timezone: ${data.timezone} <br>
+Lat/Lon: ${data.lat} , ${data.lon} <br>
+            `;
+        } else {
+            terminal.innerHTML += "Invalid IP or API Error";
+        }
+
+    });
+}
+
+</script>
+
+<!-- اعلان تحت -->
+<script>
+atOptions = {
+'key' : 'dcff8a2cffdf0642c627a5bacf3a04fd',
+'format' : 'iframe',
+'height' : 60,
+'width' : 468
+};
+</script>
+<script src="https://www.highperformanceformat.com/dcff8a2cffdf0642c627a5bacf3a04fd/invoke.js"></script>
+
+</body>
+  </html>
