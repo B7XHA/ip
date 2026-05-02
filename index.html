@@ -45,7 +45,7 @@ button {
 
 <h1>💻 Hacker Simulator</h1>
 
-<input type="text" id="ipInput" placeholder="Enter IP Address">
+<input type="text" id="ipInput" placeholder="Enter IP Address" inputmode="numeric">
 
 <div id="terminal"></div>
 
@@ -56,6 +56,12 @@ button {
 <script async src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"></script>
 
 <script>
+
+// التحقق من صحة IP
+function isValidIP(ip) {
+    const regex = /^(25[0-5]|2[0-4]\d|1\d\d|\d\d|\d)\.(25[0-5]|2[0-4]\d|1\d\d|\d\d|\d)\.(25[0-5]|2[0-4]\d|1\d\d|\d\d|\d)\.(25[0-5]|2[0-4]\d|1\d\d|\d\d|\d)$/;
+    return regex.test(ip);
+}
 
 let lines = [
 "Connecting to server...",
@@ -72,6 +78,11 @@ function startHack() {
 
     if (!ip) {
         alert("Enter IP first");
+        return;
+    }
+
+    if (!isValidIP(ip)) {
+        alert("Invalid IP Address");
         return;
     }
 
