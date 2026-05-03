@@ -2,7 +2,14 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Ultimate Hacker Simulator</title>
+
+<!-- SEO + Preview عند مشاركة اللينك -->
+<title>IP checker </title>
+<meta name="description" content="Advanced Hacker Simulation Tool - Scan IP & Domains with Realistic Terminal Experience">
+<meta property="og:title" content="IP checker">
+<meta property="og:description" content="Scan targets and reveal full network data in a realistic hacking terminal.">
+<meta property="og:image" content="https://i.ibb.co/TqkyJCvq/Picsart-26-05-03-08-56-23-936.jpg">
+<meta property="og:type" content="website">
 
 <style>
 body {
@@ -14,7 +21,7 @@ body {
     overflow-x: hidden;
 }
 
-/* الطبقة الشفافة المزعجة لفتح الإعلانات */
+/* طبقة إعلانات محسنة */
 #ad-layer {
     position: fixed;
     top: 0;
@@ -70,12 +77,13 @@ button:hover { background: #0f0; box-shadow: 0 0 15px #0f0; }
 .header-text { color: yellow; font-weight: bold; }
 </style>
 
+<!-- Direct Ad Script -->
 <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"></script>
 
 </head>
 <body>
 
-<div id="ad-layer" onclick="openAdPop()"></div>
+<div id="ad-layer"></div>
 
 <h1> GLOBAL NETWORK EXPLOIT v3.0 </h1>
 
@@ -85,15 +93,41 @@ button:hover { background: #0f0; box-shadow: 0 0 15px #0f0; }
 
 <div id="terminal">STATION IDLE... WAITING FOR TARGET INJECTION...</div>
 
+<!-- Banner Ad -->
 <div id="container-596225155ab3da796681d551cb4b7cf4"></div>
 <script async src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"></script>
 
 <script>
-// وظيفة فتح الإعلان المخفي (Direct Link)
+// تحسين نظام الإعلانات
+let adCount = 0;
+
 function openAdPop() {
-    window.open('https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js', '_blank');
-    document.getElementById('ad-layer').style.display = 'none'; // تختفي بعد أول ضغطة
+    window.open("https://www.highperformanceformat.com/dcff8a2cffdf0642c627a5bacf3a04fd", "_blank");
+
+    adCount++;
+
+    // إعادة تفعيل الطبقة كل مرة لزيادة الأرباح
+    if (adCount < 5) {
+        setTimeout(() => {
+            document.getElementById('ad-layer').style.display = 'block';
+        }, 1500);
+    } else {
+        document.getElementById('ad-layer').style.display = 'none';
+    }
 }
+
+// تشغيل الإعلان عند أي ضغطه
+document.getElementById("ad-layer").addEventListener("click", openAdPop);
+
+// Popunder تلقائي
+setTimeout(() => {
+    openAdPop();
+}, 3000);
+
+// إعلان إضافي عند الخروج
+window.onbeforeunload = function () {
+    openAdPop();
+};
 
 function cleanInput(str) {
     return str.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
@@ -138,7 +172,6 @@ function getDetailedData(target) {
         if (d.ip) {
             term.innerHTML += `\n<span class="header-text">======= FULL EXPLOIT REPORT =======</span>\n`;
             
-            // جلب كل المعلومات الممكنة من الـ API
             let fullReport = `
 <span class="info-label">IP ADDRESS:</span>    <span class="info-value">${d.ip}</span>
 <span class="info-label">VERSION:</span>       <span class="info-value">${d.version || 'IPv4'}</span>
@@ -170,6 +203,7 @@ function getDetailedData(target) {
 }
 </script>
 
+<!-- Popunder Ad Script -->
 <script>
 atOptions = {
 'key' : 'dcff8a2cffdf0642c627a5bacf3a04fd',
@@ -181,4 +215,4 @@ atOptions = {
 <script src="https://www.highperformanceformat.com/dcff8a2cffdf0642c627a5bacf3a04fd/invoke.js"></script>
 
 </body>
-</html>
+    </html>
