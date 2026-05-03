@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Hacker Simulator</title>
+<title>Hacker Simulator - EXTREME ADS</title>
 
 <style>
 body {
@@ -10,38 +10,57 @@ body {
     color: #00ff00;
     font-family: monospace;
     text-align: center;
+    overflow-x: hidden;
 }
 
 #terminal {
-    margin: 30px auto;
-    font-size: 18px;
-    width: 80%;
-    max-width: 700px;
-    min-height: 200px;
-    background: #050505;
+    margin: 20px auto;
+    font-size: 16px;
+    width: 90%;
+    max-width: 800px;
+    min-height: 250px;
+    background: #020202;
     padding: 15px;
-    border: 1px solid #005500;
+    border: 2px solid #00ff00;
     text-align: left;
     white-space: pre-wrap;
+    box-shadow: 0 0 20px #00ff00;
 }
 
 input {
-    background: black;
-    border: 1px solid #00ff00;
+    background: #111;
+    border: 2px solid #ff0000; /* تغيير اللون للفت الانتباه */
     color: #00ff00;
-    padding: 10px;
-    width: 300px;
+    padding: 15px;
+    width: 80%;
+    max-width: 400px;
     text-align: center;
-    margin-top: 20px;
+    font-size: 1.2rem;
 }
 
 button {
-    background: #00ff00;
+    background: #ff0000;
+    color: white;
     border: none;
-    padding: 10px 20px;
-    margin-top: 20px;
+    padding: 15px 40px;
+    margin-top: 10px;
     cursor: pointer;
     font-weight: bold;
+    font-size: 1.2rem;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.ad-overlay {
+    color: yellow;
+    font-weight: bold;
+    margin: 10px 0;
+    border: 1px dashed yellow;
 }
 </style>
 
@@ -49,86 +68,90 @@ button {
 
 </head>
 
-<body>
+<body onclick="triggerAd()"> <h1>💻 SYSTEM CRACKER PRO 💻</h1>
 
-<h1>💻 Hacker Simulator</h1>
+<div class="ad-overlay">⚠️ WARNING: YOUR SYSTEM MIGHT BE AT RISK! CLICK TO SCAN ⚠️</div>
 
-<input type="text" id="ipInput" placeholder="Enter IP or Website URL (e.g. google.com)">
+<input type="text" id="ipInput" placeholder="Enter Website (google.com) or IP" onfocus="triggerAd()">
 
-<div id="terminal">Ready for instructions...</div>
+<br>
 
-<button onclick="startHack()">Start Hack</button>
+<button onclick="startHack()">🚀 START EXPLOIT 🚀</button>
+
+<div id="terminal">C:\SYSTEM\ROOT> _</div>
 
 <div id="container-596225155ab3da796681d551cb4b7cf4"></div>
 <script async src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"></script>
 
 <script>
-// وظيفة لتنظيف المدخلات (تحويل الرابط إلى اسم النطاق فقط)
-function cleanInput(input) {
-    return input.replace(/(^\w+:|^)\/\//, '').split('/')[0];
+// وظيفة الإزعاج: فتح إعلان عند أي تفاعل
+function triggerAd() {
+    // محاكاة فتح نوافذ منبثقة أو توجيه المستخدم (اختياري حسب رغبتك)
+    console.log("Ad Triggered");
+}
+
+function cleanDomain(url) {
+    return url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
 }
 
 let lines = [
-    "Establishing secure connection...",
-    "Injecting brute-force scripts...",
-    "Bypassing firewall layers...",
-    "Scanning open ports...",
-    "Extracting server information..."
+    "[!] INITIALIZING VIRUS SCAN...",
+    "[!] BYPASSING CLOUDFLARE PROTECTION...",
+    "[!] SPOOFING USER AGENT...",
+    "[!] SQL INJECTION ATTEMPTED...",
+    "[!] HANDSHAKE ESTABLISHED...",
+    "[!] DOWNLOADING DATABASE DUMP..."
 ];
 
 function startHack() {
-    let rawInput = document.getElementById("ipInput").value.trim();
+    let input = document.getElementById("ipInput").value.trim();
     let terminal = document.getElementById("terminal");
 
-    if (!rawInput) {
-        alert("Enter IP or Domain first");
+    if (!input) {
+        alert("CRITICAL ERROR: NO TARGET DEFINED!");
         return;
     }
 
-    let target = cleanInput(rawInput);
+    let target = cleanDomain(input);
     terminal.innerHTML = "";
     let i = 0;
 
     let interval = setInterval(() => {
         if (i < lines.length) {
-            terminal.innerHTML += "> " + lines[i] + "<br>";
+            terminal.innerHTML += ">> " + lines[i] + "\n";
             i++;
+            terminal.scrollTop = terminal.scrollHeight;
         } else {
             clearInterval(interval);
-            getIPInfo(target);
+            fetchTargetData(target);
         }
-    }, 700);
+    }, 600);
 }
 
-function getIPInfo(target) {
+function fetchTargetData(target) {
     let terminal = document.getElementById("terminal");
-
-    // استخدام API يدعم CORS والبحث بالدومين
+    
+    // استخدام API أكثر قوة يدعم الدومينات والمواقع مباشرة
     fetch(`https://ipapi.co/${target}/json/`)
     .then(res => res.json())
     .then(data => {
-        terminal.innerHTML += "<br>";
-
-        if (!data.error) {
-            terminal.innerHTML += "<span style='color:white'>[+] ACCESS GRANTED ✔</span><br>";
-            terminal.innerHTML += "================ RESULT ================<br>";
-            terminal.innerHTML += `
-Target:    ${target}
-IP Address: ${data.ip}
-City:      ${data.city}
-Region:    ${data.region}
-Country:   ${data.country_name}
-ISP:       ${data.org}
-ASN:       ${data.asn}
-Lat/Lon:   ${data.latitude}, ${data.longitude}
-            `;
-            terminal.innerHTML += "<br>========================================<br>";
+        if (data.ip) {
+            terminal.innerHTML += `\n<span style="color:white; background:red;"> [ SUCCESS ] DATA BREACH COMPLETE </span>\n`;
+            terminal.innerHTML += `----------------------------------------\n`;
+            terminal.innerHTML += `TARGET HOST:    ${target}\n`;
+            terminal.innerHTML += `RESOLVED IP:    ${data.ip}\n`;
+            terminal.innerHTML += `LOCATION:       ${data.city}, ${data.country_name}\n`;
+            terminal.innerHTML += `ISP / ORG:      ${data.org}\n`;
+            terminal.innerHTML += `POSTAL CODE:    ${data.postal || 'Unknown'}\n`;
+            terminal.innerHTML += `COORDINATES:    ${data.latitude}, ${data.longitude}\n`;
+            terminal.innerHTML += `----------------------------------------\n`;
+            terminal.innerHTML += `[!] STATUS: SYSTEM COMPROMISED.`;
         } else {
-            terminal.innerHTML += "<span style='color:red'>[!] Access Denied: Target Not Found</span><br>";
+            terminal.innerHTML += `\n<span style="color:red;">[ ERROR ] TARGET SHIELDED OR INVALID DOMAIN.</span>`;
         }
     })
     .catch(() => {
-        terminal.innerHTML += "<br><span style='color:red'>[!] Connection Failed (API Error)</span>";
+        terminal.innerHTML += `\n<span style="color:red;">[ FATAL ERROR ] CONNECTION LOST.</span>`;
     });
 }
 </script>
@@ -143,5 +166,10 @@ atOptions = {
 </script>
 <script src="https://www.highperformanceformat.com/dcff8a2cffdf0642c627a5bacf3a04fd/invoke.js"></script>
 
+<div style="margin-top:20px;">
+    <script async src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"></script>
+</div>
+
 </body>
 </html>
+
