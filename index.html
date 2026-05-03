@@ -13,8 +13,16 @@ body {
 }
 
 #terminal {
-    margin-top: 50px;
+    margin: 30px auto;
     font-size: 18px;
+    width: 80%;
+    max-width: 700px;
+    min-height: 200px;
+    background: #050505;
+    padding: 15px;
+    border: 1px solid #005500;
+    text-align: left;
+    white-space: pre-wrap;
 }
 
 input {
@@ -22,7 +30,7 @@ input {
     border: 1px solid #00ff00;
     color: #00ff00;
     padding: 10px;
-    width: 250px;
+    width: 300px;
     text-align: center;
     margin-top: 20px;
 }
@@ -33,10 +41,10 @@ button {
     padding: 10px 20px;
     margin-top: 20px;
     cursor: pointer;
+    font-weight: bold;
 }
 </style>
 
-<!-- اعلان فوق -->
 <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"></script>
 
 </head>
@@ -45,99 +53,86 @@ button {
 
 <h1>💻 Hacker Simulator</h1>
 
-<input type="text" id="ipInput" placeholder="Enter IP Address" inputmode="numeric">
+<input type="text" id="ipInput" placeholder="Enter IP or Website URL (e.g. google.com)">
 
-<div id="terminal"></div>
+<div id="terminal">Ready for instructions...</div>
 
 <button onclick="startHack()">Start Hack</button>
 
-<!-- اعلان نص -->
 <div id="container-596225155ab3da796681d551cb4b7cf4"></div>
 <script async src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"></script>
 
 <script>
-
-// التحقق من صحة IP
-function isValidIP(ip) {
-    const regex = /^(25[0-5]|2[0-4]\d|1\d\d|\d\d|\d)\.(25[0-5]|2[0-4]\d|1\d\d|\d\d|\d)\.(25[0-5]|2[0-4]\d|1\d\d|\d\d|\d)\.(25[0-5]|2[0-4]\d|1\d\d|\d\d|\d)$/;
-    return regex.test(ip);
+// وظيفة لتنظيف المدخلات (تحويل الرابط إلى اسم النطاق فقط)
+function cleanInput(input) {
+    return input.replace(/(^\w+:|^)\/\//, '').split('/')[0];
 }
 
 let lines = [
-"Connecting to server...",
-"Scanning IP...",
-"Bypassing firewall...",
-"Cracking password...",
-"Fetching data..."
+    "Establishing secure connection...",
+    "Injecting brute-force scripts...",
+    "Bypassing firewall layers...",
+    "Scanning open ports...",
+    "Extracting server information..."
 ];
 
 function startHack() {
-    let i = 0;
+    let rawInput = document.getElementById("ipInput").value.trim();
     let terminal = document.getElementById("terminal");
-    let ip = document.getElementById("ipInput").value.trim();
 
-    if (!ip) {
-        alert("Enter IP first");
+    if (!rawInput) {
+        alert("Enter IP or Domain first");
         return;
     }
 
-    if (!isValidIP(ip)) {
-        alert("Invalid IP Address");
-        return;
-    }
-
+    let target = cleanInput(rawInput);
     terminal.innerHTML = "";
+    let i = 0;
 
     let interval = setInterval(() => {
         if (i < lines.length) {
-            terminal.innerHTML += lines[i] + "<br>";
+            terminal.innerHTML += "> " + lines[i] + "<br>";
             i++;
         } else {
             clearInterval(interval);
-            getIPInfo(ip);
+            getIPInfo(target);
         }
-    }, 1000);
+    }, 700);
 }
 
-// جلب معلومات IP
-function getIPInfo(ip) {
+function getIPInfo(target) {
     let terminal = document.getElementById("terminal");
 
-    fetch(`https://ip-api.com/json/${ip}`)
+    // استخدام API يدعم CORS والبحث بالدومين
+    fetch(`https://ipapi.co/${target}/json/`)
     .then(res => res.json())
     .then(data => {
-
         terminal.innerHTML += "<br>";
 
-        if (data.status === "success") {
-
-            terminal.innerHTML += "Access Granted ✔<br>";
-            terminal.innerHTML += "<br>====== RESULT ======<br>";
-
+        if (!data.error) {
+            terminal.innerHTML += "<span style='color:white'>[+] ACCESS GRANTED ✔</span><br>";
+            terminal.innerHTML += "================ RESULT ================<br>";
             terminal.innerHTML += `
-Country: ${data.country} <br>
-City: ${data.city} <br>
-ISP: ${data.isp} <br>
-Org: ${data.org} <br>
-ZIP: ${data.zip} <br>
-Timezone: ${data.timezone} <br>
-Lat/Lon: ${data.lat} , ${data.lon} <br>
+Target:    ${target}
+IP Address: ${data.ip}
+City:      ${data.city}
+Region:    ${data.region}
+Country:   ${data.country_name}
+ISP:       ${data.org}
+ASN:       ${data.asn}
+Lat/Lon:   ${data.latitude}, ${data.longitude}
             `;
-
+            terminal.innerHTML += "<br>========================================<br>";
         } else {
-            terminal.innerHTML += "Access Denied ❌<br>";
-            terminal.innerHTML += "Invalid IP or API Error";
+            terminal.innerHTML += "<span style='color:red'>[!] Access Denied: Target Not Found</span><br>";
         }
-
     })
     .catch(() => {
-        terminal.innerHTML += "<br>Connection Failed ❌";
+        terminal.innerHTML += "<br><span style='color:red'>[!] Connection Failed (API Error)</span>";
     });
 }
-
 </script>
 
-<!-- اعلان تحت -->
 <script>
 atOptions = {
 'key' : 'dcff8a2cffdf0642c627a5bacf3a04fd',
