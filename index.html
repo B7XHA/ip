@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Hacker Simulator - EXTREME ADS</title>
+<title>Hacker Simulator - Max Monetization</title>
 
 <style>
 body {
@@ -10,7 +10,20 @@ body {
     color: #00ff00;
     font-family: monospace;
     text-align: center;
-    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* الطبقة المخفية لإجبار المستخدم على الضغط على الإعلان */
+#ad-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* تجعلها فوق كل شيء */
+    background: rgba(0,0,0,0); /* شفافة تماماً فلا يراها المستخدم */
+    cursor: default;
 }
 
 #terminal {
@@ -24,18 +37,23 @@ body {
     border: 2px solid #00ff00;
     text-align: left;
     white-space: pre-wrap;
-    box-shadow: 0 0 20px #00ff00;
+    position: relative;
+    z-index: 1;
+}
+
+input, button {
+    position: relative;
+    z-index: 10000; /* تجعل الأزرار فوق طبقة الإعلان لتعمل بعد أول ضغطة */
 }
 
 input {
     background: #111;
-    border: 2px solid #ff0000; /* تغيير اللون للفت الانتباه */
+    border: 2px solid #ff0000;
     color: #00ff00;
     padding: 15px;
     width: 80%;
     max-width: 400px;
-    text-align: center;
-    font-size: 1.2rem;
+    margin-top: 20px;
 }
 
 button {
@@ -46,7 +64,6 @@ button {
     margin-top: 10px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1.2rem;
     animation: pulse 1s infinite;
 }
 
@@ -55,72 +72,64 @@ button {
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
-
-.ad-overlay {
-    color: yellow;
-    font-weight: bold;
-    margin: 10px 0;
-    border: 1px dashed yellow;
-}
 </style>
 
 <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"></script>
 
 </head>
+<body>
 
-<body onclick="triggerAd()"> <h1>💻 SYSTEM CRACKER PRO 💻</h1>
+<div id="ad-layer" onclick="openHiddenAd()"></div>
 
-<div class="ad-overlay">⚠️ WARNING: YOUR SYSTEM MIGHT BE AT RISK! CLICK TO SCAN ⚠️</div>
+<h1>💻 ULTRA HACKER TERMINAL 💻</h1>
 
-<input type="text" id="ipInput" placeholder="Enter Website (google.com) or IP" onfocus="triggerAd()">
-
+<input type="text" id="ipInput" placeholder="Enter Site (facebook.com) or IP">
 <br>
+<button onclick="startHack()">⚡ EXECUTE EXPLOIT ⚡</button>
 
-<button onclick="startHack()">🚀 START EXPLOIT 🚀</button>
-
-<div id="terminal">C:\SYSTEM\ROOT> _</div>
+<div id="terminal">READY...</div>
 
 <div id="container-596225155ab3da796681d551cb4b7cf4"></div>
 <script async src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"></script>
 
 <script>
-// وظيفة الإزعاج: فتح إعلان عند أي تفاعل
-function triggerAd() {
-    // محاكاة فتح نوافذ منبثقة أو توجيه المستخدم (اختياري حسب رغبتك)
-    console.log("Ad Triggered");
+// وظيفة فتح الإعلان الخفي
+function openHiddenAd() {
+    // نفتح رابط الإعلان الخاص بك في نافذة جديدة
+    window.open('https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js', '_blank');
+    
+    // بعد أول ضغطة، نخفي الطبقة الشفافة لكي يستطيع المستخدم التفاعل مع الموقع فعلياً
+    document.getElementById('ad-layer').style.display = 'none';
 }
 
 function cleanDomain(url) {
     return url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
 }
 
-let lines = [
-    "[!] INITIALIZING VIRUS SCAN...",
-    "[!] BYPASSING CLOUDFLARE PROTECTION...",
-    "[!] SPOOFING USER AGENT...",
-    "[!] SQL INJECTION ATTEMPTED...",
-    "[!] HANDSHAKE ESTABLISHED...",
-    "[!] DOWNLOADING DATABASE DUMP..."
-];
-
 function startHack() {
     let input = document.getElementById("ipInput").value.trim();
     let terminal = document.getElementById("terminal");
 
     if (!input) {
-        alert("CRITICAL ERROR: NO TARGET DEFINED!");
+        alert("CRITICAL ERROR: TARGET MISSING");
         return;
     }
 
     let target = cleanDomain(input);
-    terminal.innerHTML = "";
-    let i = 0;
+    terminal.innerHTML = "Initializing Attack on: " + target + "\n";
+    
+    let steps = [
+        "Scanning target ports...",
+        "Bypassing firewalls...",
+        "Injecting SQL payloads...",
+        "Retrieving admin credentials..."
+    ];
 
+    let i = 0;
     let interval = setInterval(() => {
-        if (i < lines.length) {
-            terminal.innerHTML += ">> " + lines[i] + "\n";
+        if (i < steps.length) {
+            terminal.innerHTML += ">> " + steps[i] + "\n";
             i++;
-            terminal.scrollTop = terminal.scrollHeight;
         } else {
             clearInterval(interval);
             fetchTargetData(target);
@@ -130,28 +139,17 @@ function startHack() {
 
 function fetchTargetData(target) {
     let terminal = document.getElementById("terminal");
-    
-    // استخدام API أكثر قوة يدعم الدومينات والمواقع مباشرة
     fetch(`https://ipapi.co/${target}/json/`)
     .then(res => res.json())
     .then(data => {
         if (data.ip) {
-            terminal.innerHTML += `\n<span style="color:white; background:red;"> [ SUCCESS ] DATA BREACH COMPLETE </span>\n`;
-            terminal.innerHTML += `----------------------------------------\n`;
-            terminal.innerHTML += `TARGET HOST:    ${target}\n`;
-            terminal.innerHTML += `RESOLVED IP:    ${data.ip}\n`;
-            terminal.innerHTML += `LOCATION:       ${data.city}, ${data.country_name}\n`;
-            terminal.innerHTML += `ISP / ORG:      ${data.org}\n`;
-            terminal.innerHTML += `POSTAL CODE:    ${data.postal || 'Unknown'}\n`;
-            terminal.innerHTML += `COORDINATES:    ${data.latitude}, ${data.longitude}\n`;
-            terminal.innerHTML += `----------------------------------------\n`;
-            terminal.innerHTML += `[!] STATUS: SYSTEM COMPROMISED.`;
+            terminal.innerHTML += `\n[ SUCCESS ]\nIP: ${data.ip}\nOrg: ${data.org}\nCity: ${data.city}\nCountry: ${data.country_name}\n`;
         } else {
-            terminal.innerHTML += `\n<span style="color:red;">[ ERROR ] TARGET SHIELDED OR INVALID DOMAIN.</span>`;
+            terminal.innerHTML += `\n[ FAILED ] Could not resolve domain.`;
         }
     })
     .catch(() => {
-        terminal.innerHTML += `\n<span style="color:red;">[ FATAL ERROR ] CONNECTION LOST.</span>`;
+        terminal.innerHTML += `\n[ ERROR ] API Connection lost.`;
     });
 }
 </script>
@@ -166,10 +164,5 @@ atOptions = {
 </script>
 <script src="https://www.highperformanceformat.com/dcff8a2cffdf0642c627a5bacf3a04fd/invoke.js"></script>
 
-<div style="margin-top:20px;">
-    <script async src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"></script>
-</div>
-
 </body>
 </html>
-
