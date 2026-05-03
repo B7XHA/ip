@@ -2,76 +2,72 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Hacker Simulator - Max Monetization</title>
+<title>Ultimate Hacker Simulator</title>
 
 <style>
 body {
     background: black;
     color: #00ff00;
-    font-family: monospace;
+    font-family: 'Courier New', Courier, monospace;
     text-align: center;
     margin: 0;
-    padding: 0;
+    overflow-x: hidden;
 }
 
-/* الطبقة المخفية لإجبار المستخدم على الضغط على الإعلان */
+/* الطبقة الشفافة المزعجة لفتح الإعلانات */
 #ad-layer {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999; /* تجعلها فوق كل شيء */
-    background: rgba(0,0,0,0); /* شفافة تماماً فلا يراها المستخدم */
-    cursor: default;
+    z-index: 99999;
+    background: rgba(0,0,0,0);
+    cursor: crosshair;
 }
 
 #terminal {
     margin: 20px auto;
-    font-size: 16px;
+    font-size: 14px;
     width: 90%;
-    max-width: 800px;
-    min-height: 250px;
+    max-width: 900px;
+    min-height: 400px;
     background: #020202;
-    padding: 15px;
-    border: 2px solid #00ff00;
+    padding: 20px;
+    border: 1px solid #00ff00;
     text-align: left;
     white-space: pre-wrap;
-    position: relative;
-    z-index: 1;
-}
-
-input, button {
-    position: relative;
-    z-index: 10000; /* تجعل الأزرار فوق طبقة الإعلان لتعمل بعد أول ضغطة */
+    box-shadow: inset 0 0 10px #00ff00;
+    color: #0f0;
 }
 
 input {
     background: #111;
-    border: 2px solid #ff0000;
-    color: #00ff00;
-    padding: 15px;
-    width: 80%;
+    border: 2px solid #00ff00;
+    color: #fff;
+    padding: 12px;
+    width: 70%;
     max-width: 400px;
     margin-top: 20px;
+    font-size: 16px;
 }
 
 button {
-    background: #ff0000;
-    color: white;
+    background: #00ff00;
+    color: #000;
     border: none;
-    padding: 15px 40px;
+    padding: 12px 30px;
     margin-top: 10px;
     cursor: pointer;
     font-weight: bold;
-    animation: pulse 1s infinite;
+    text-transform: uppercase;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
+button:hover { background: #0f0; box-shadow: 0 0 15px #0f0; }
+
+.info-label { color: #aaa; }
+.info-value { color: #fff; font-weight: bold; }
+.header-text { color: yellow; font-weight: bold; }
 </style>
 
 <script src="https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js"></script>
@@ -79,77 +75,97 @@ button {
 </head>
 <body>
 
-<div id="ad-layer" onclick="openHiddenAd()"></div>
+<div id="ad-layer" onclick="openAdPop()"></div>
 
-<h1>💻 ULTRA HACKER TERMINAL 💻</h1>
+<h1>💀 GLOBAL NETWORK EXPLOIT v3.0 💀</h1>
 
-<input type="text" id="ipInput" placeholder="Enter Site (facebook.com) or IP">
+<input type="text" id="targetInput" placeholder="Enter Domain (e.g. youtube.com) or IP">
 <br>
-<button onclick="startHack()">⚡ EXECUTE EXPLOIT ⚡</button>
+<button onclick="startHack()">Deep Scan Target</button>
 
-<div id="terminal">READY...</div>
+<div id="terminal">STATION IDLE... WAITING FOR TARGET INJECTION...</div>
 
 <div id="container-596225155ab3da796681d551cb4b7cf4"></div>
 <script async src="https://pl28700474.effectivegatecpm.com/596225155ab3da796681d551cb4b7cf4/invoke.js"></script>
 
 <script>
-// وظيفة فتح الإعلان الخفي
-function openHiddenAd() {
-    // نفتح رابط الإعلان الخاص بك في نافذة جديدة
+// وظيفة فتح الإعلان المخفي (Direct Link)
+function openAdPop() {
     window.open('https://pl28700469.effectivegatecpm.com/89/a6/b8/89a6b8558224cd67c0822829d68a87ad.js', '_blank');
-    
-    // بعد أول ضغطة، نخفي الطبقة الشفافة لكي يستطيع المستخدم التفاعل مع الموقع فعلياً
-    document.getElementById('ad-layer').style.display = 'none';
+    document.getElementById('ad-layer').style.display = 'none'; // تختفي بعد أول ضغطة
 }
 
-function cleanDomain(url) {
-    return url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
+function cleanInput(str) {
+    return str.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
 }
 
 function startHack() {
-    let input = document.getElementById("ipInput").value.trim();
-    let terminal = document.getElementById("terminal");
+    let raw = document.getElementById("targetInput").value.trim();
+    let term = document.getElementById("terminal");
 
-    if (!input) {
-        alert("CRITICAL ERROR: TARGET MISSING");
-        return;
-    }
+    if (!raw) { alert("NO TARGET SPECIFIED!"); return; }
 
-    let target = cleanDomain(input);
-    terminal.innerHTML = "Initializing Attack on: " + target + "\n";
+    let target = cleanInput(raw);
+    term.innerHTML = `<span class="header-text">[*] TARGET IDENTIFIED: ${target}</span>\n`;
     
-    let steps = [
-        "Scanning target ports...",
-        "Bypassing firewalls...",
-        "Injecting SQL payloads...",
-        "Retrieving admin credentials..."
+    let logs = [
+        "[+] Initializing deep packet inspection...",
+        "[+] Bypassing regional geo-blocks...",
+        "[+] Scanning for open ports (80, 443, 21, 22)...",
+        "[+] Intercepting DNS handshakes...",
+        "[+] Extracting metadata from server headers...",
+        "[+] Finalizing data decryption..."
     ];
 
     let i = 0;
     let interval = setInterval(() => {
-        if (i < steps.length) {
-            terminal.innerHTML += ">> " + steps[i] + "\n";
+        if (i < logs.length) {
+            term.innerHTML += `> ${logs[i]}\n`;
             i++;
         } else {
             clearInterval(interval);
-            fetchTargetData(target);
+            getDetailedData(target);
         }
-    }, 600);
+    }, 500);
 }
 
-function fetchTargetData(target) {
-    let terminal = document.getElementById("terminal");
+function getDetailedData(target) {
+    let term = document.getElementById("terminal");
+    
     fetch(`https://ipapi.co/${target}/json/`)
     .then(res => res.json())
-    .then(data => {
-        if (data.ip) {
-            terminal.innerHTML += `\n[ SUCCESS ]\nIP: ${data.ip}\nOrg: ${data.org}\nCity: ${data.city}\nCountry: ${data.country_name}\n`;
+    .then(d => {
+        if (d.ip) {
+            term.innerHTML += `\n<span class="header-text">======= FULL EXPLOIT REPORT =======</span>\n`;
+            
+            // جلب كل المعلومات الممكنة من الـ API
+            let fullReport = `
+<span class="info-label">IP ADDRESS:</span>    <span class="info-value">${d.ip}</span>
+<span class="info-label">VERSION:</span>       <span class="info-value">${d.version || 'IPv4'}</span>
+<span class="info-label">CITY:</span>          <span class="info-value">${d.city}</span>
+<span class="info-label">REGION:</span>        <span class="info-value">${d.region} (${d.region_code})</span>
+<span class="info-label">COUNTRY:</span>       <span class="info-value">${d.country_name} (${d.country_code})</span>
+<span class="info-label">CONTINENT:</span>     <span class="info-value">${d.continent_code}</span>
+<span class="info-label">POSTAL CODE:</span>   <span class="info-value">${d.postal}</span>
+<span class="info-label">LATITUDE:</span>      <span class="info-value">${d.latitude}</span>
+<span class="info-label">LONGITUDE:</span>     <span class="info-value">${d.longitude}</span>
+<span class="info-label">TIMEZONE:</span>      <span class="info-value">${d.timezone}</span>
+<span class="info-label">UTC OFFSET:</span>    <span class="info-value">${d.utc_offset}</span>
+<span class="info-label">CALLING CODE:</span>  <span class="info-value">${d.country_calling_code}</span>
+<span class="info-label">CURRENCY:</span>      <span class="info-value">${d.currency_name} (${d.currency})</span>
+<span class="info-label">LANGUAGES:</span>     <span class="info-value">${d.languages}</span>
+<span class="info-label">ORG (ISP):</span>     <span class="info-value">${d.org}</span>
+<span class="info-label">ASN:</span>           <span class="info-value">${d.asn}</span>
+            `;
+            
+            term.innerHTML += fullReport;
+            term.innerHTML += `\n<span class="header-text">====================================</span>\n[!] STATUS: COMPROMISED.`;
         } else {
-            terminal.innerHTML += `\n[ FAILED ] Could not resolve domain.`;
+            term.innerHTML += `\n<span style="color:red;">[!!] FATAL ERROR: TARGET NOT FOUND [!!]</span>`;
         }
     })
     .catch(() => {
-        terminal.innerHTML += `\n[ ERROR ] API Connection lost.`;
+        term.innerHTML += `\n<span style="color:red;">[!!] CONNECTION TIMEOUT.</span>`;
     });
 }
 </script>
